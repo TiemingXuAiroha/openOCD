@@ -14,6 +14,9 @@
  *   Copyright (C) ST-Ericsson SA 2011                                     *
  *   michel.jaouen@stericsson.com : smp minimum support                    *
  *                                                                         *
+ *   Copyright (C) 2013 by Franck Jullien                                  *
+ *   elec4fun@gmail.com : target description file support                  *
+ *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; either version 2 of the License, or     *
@@ -191,6 +194,9 @@ struct target {
 	 * the target attached to the gdb is changing dynamically by changing
 	 * gdb_service->target pointer */
 	struct gdb_service *gdb_service;
+
+	char *gdb_tdesc_path;					/* Path to the target description file */
+	int remaining_xfer;					/* Remaining transfert when replying to qXfer */
 };
 
 struct target_list {
@@ -490,6 +496,12 @@ int target_write_memory(struct target *target,
 		uint32_t address, uint32_t size, uint32_t count, const uint8_t *buffer);
 int target_write_phys_memory(struct target *target,
 		uint32_t address, uint32_t size, uint32_t count, const uint8_t *buffer);
+
+/* Generate a target descriptor file.
+ *
+ * This routine is wrapper for target->type->generate_tdesc_file.
+ */
+int target_generate_tdesc_file(struct target *target, const char *filename);
 
 /*
  * Write to target memory using the virtual address.
