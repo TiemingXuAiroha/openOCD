@@ -39,7 +39,7 @@ int generate_feature_section(struct target *target, struct fileio *fileio,
 	int reg_list_size;
 	bool nogroup = false;
 
-	int retval = target_get_gdb_reg_list(target, &reg_list, &reg_list_size);
+	int retval = target_get_gdb_reg_list(target, &reg_list, &reg_list_size, FULL_LIST);
 	if (retval != ERROR_OK)
 		return retval;
 
@@ -106,7 +106,7 @@ int get_reg_features_list(struct target *target, char **feature_list[])
 	int reg_list_size;
 	int tbl_sz = 0;
 
-	int retval = target_get_gdb_reg_list(target, &reg_list, &reg_list_size);
+	int retval = target_get_gdb_reg_list(target, &reg_list, &reg_list_size, FULL_LIST);
 	if (retval != ERROR_OK) {
 		*feature_list = NULL;
 		return retval;
@@ -147,7 +147,7 @@ int count_reg_without_group(struct target *target)
 	int reg_list_size;
 	int reg_without_group = 0;
 
-	int retval = target_get_gdb_reg_list(target, &reg_list, &reg_list_size);
+	int retval = target_get_gdb_reg_list(target, &reg_list, &reg_list_size, FULL_LIST);
 	if (retval != ERROR_OK)
 		return retval;
 
