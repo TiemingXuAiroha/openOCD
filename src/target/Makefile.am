@@ -6,6 +6,9 @@ else
 OOCD_TRACE_FILES =
 endif
 
+SUBDIRS = openrisc
+libtarget_la_LIBADD = $(top_builddir)/src/target/openrisc/libopenrisc.la
+
 BIN2C		= $(top_builddir)/src/helper/bin2char$(EXEEXT_FOR_BUILD)
 
 DEBUG_HANDLER	= $(srcdir)/xscale/debug_handler.bin
@@ -107,7 +110,6 @@ MIPS32_SRC = \
 	mips32_pracc.c \
 	mips32_dmaacc.c \
 	mips_ejtag.c
-
 
 noinst_HEADERS = \
 	algorithm.h \
