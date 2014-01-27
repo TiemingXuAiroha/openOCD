@@ -1,4 +1,7 @@
-openOCD
+# **Unless you are using the classic Mohor debug interface, you should now use the upstream version of OpenOCD**
+
+
+OpenOCD
 =======
 
 openOCD including OpenRISC support with Mohor debug interface and
